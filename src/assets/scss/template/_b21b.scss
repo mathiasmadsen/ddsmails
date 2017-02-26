@@ -1,0 +1,63 @@
+// These are the styles to make some of the templates look extra nice.
+// Feel free to remove these styles for production!
+
+// Body Styles 
+body,
+html, 
+.body {
+  background: #f3f3f3 !important;
+}
+
+.container.header {
+  background: #f3f3f3;
+}
+
+.container.preheader {
+  background: #f3f3f3;
+}
+
+// Full Width Headers
+.header {
+  background: $primary-color;
+  p,h1,h2,h3,h4,h5 {
+    font-family: 'Asap', sans-serif;
+    color: #fff;
+    padding-top: 15px;
+  }
+}
+
+.header .columns {
+  padding-bottom: 0;
+}
+
+.header .wrapper-inner {
+  padding: 20px;
+}
+
+.header .container {
+  background: transparent;
+}
+
+.preheader {
+  p{
+    font-size: $small-font-size;
+  }
+}
+
+.notice {
+  font-size: $small-font-size;
+  color: $dark-gray;
+}
+
+table.button table td a {
+  font-size: 20px;
+}
+
+// Links
+.footer {
+  a {color: #66D3FB;
+   }
+  span {
+    color: $primary-color;
+  }
+}
