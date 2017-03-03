@@ -1,12 +1,12 @@
 ---
-subject: Faktura
+subject: Infomail
 ---
 
   <container class="preheader">
   <spacer size="30"></spacer>
     <row class="">
       <columns small="6">
-        <p class="text-small">Faktura fra ${object.company_id.name}</p>
+        <p class="text-small">Infomail fra ${object.company_id.name}</p>
       </columns>
     </row>
     <row class="header">
@@ -28,32 +28,21 @@ subject: Faktura
 
   <row>
     <columns>
-      <h2>Faktura ${object.number}</h2>
+      <h2>Infomail – [Måned + År]</h2>
       <p>Hej ${object.partner_id.name},<br><br>
-      Du har modtaget en ny faktura fra ${object.company_id.name}.</p>
+      Her følger infomailen for [Måned] måned.</p>
       <spacer size="15"></spacer>
-      <h2>Detaljer</h2>
+      <h2>Oversigt</h2>
+      <ul>
+      	<li>Lorem</li>
+      	<li>Ipsum</li>
+      	<li>Dolor</li>
+      </ul>
+      <spacer size="30"></spacer>
       
-      <table>
-        <tr><th>Item</th><th>Price</th></tr>
-        <tr><td>Fakturanummer</td><td>${object.number}</td></tr>
-        <tr><td>Fakturabeløb</td><td>${"%.2f" % object.amount_total} ${object.currency_id.name}</td></tr>
-        <tr><td>Betalingsdato</td><td>${object.date_due}</td></tr>
-      </table>
-      <spacer size="30"></spacer>
-      % if object.organization_id.payment_activated: % if object.profile_id.subscription_card:
-      <p>Fakturaen vil blive betalt automatisk med det registrerede betalingskort (${object.profile_id.subscription_card}) på betalingsdatoen.<br><br>
-      <button href="${object.payment_link}" class="rounded">Betal faktura</button></p>
-      % else:
-      <p>Du kan betale denne faktura eller registrere et betalingskort til automatiske betalinger på:<br>
-      <button href="${object.payment_link}" class="rounded">Betal faktura</button></p>
-      % endif % endif
-      </p>
-      <spacer size="30"></spacer>
-      <h3>Specifikation:</h3>
-      % for line in object.invoice_line: % endfor
-      <p><b>${line.name}    ${"%.2f" % line.price_subtotal}</b>
-      <br><br>
+      <h3>Event</h3>
+      <p>Beskrivelse.<br><br>
+      <button href="#" class="rounded">Tilmeld dig!</button></p>
 
       <spacer size="30"></spacer>
       <p>Spejderhilsen<br>
