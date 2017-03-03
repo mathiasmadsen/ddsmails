@@ -6,7 +6,7 @@ subject: Faktura
   <spacer size="30"></spacer>
     <row class="">
       <columns small="6">
-        <p class="text-small">Faktura fra Bellahøj 21st Barking</p>
+        <p class="text-small">Faktura fra ${object.company_id.name}</p>
       </columns>
     </row>
     <row class="header">
@@ -17,7 +17,7 @@ subject: Faktura
       </columns>
       <columns small="8">
       <spacer size="30"></spacer>
-        <h1>Bellahøj 21st Barking</h1>
+        <h1>${object.company_id.name}</h1>
         <spacer size="30"></spacer>
       </columns>
     </row>
@@ -28,27 +28,36 @@ subject: Faktura
 
   <row>
     <columns>
-      <h2>Faktura 001</h2>
-      <p>Kære ___<br><br>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dictum nisi at elit vehicula sollicitudin. Nulla convallis posuere massa, eget dignissim nibh vehicula ornare. Sed mattis diam vel fringilla sagittis. In ac dui eget est dignissim malesuada a ac velit. Aliquam erat volutpat. Mauris tincidunt consectetur odio, ultrices placerat ante semper quis. Nunc auctor vulputate lorem vel congue. Fusce eu est ipsum. Aliquam bibendum pretium ex, vitae sodales arcu dapibus vel. Aliquam elit nisi, tincidunt faucibus arcu eget, interdum efficitur nunc. Aenean semper purus lacus. Pellentesque ac eros a nunc hendrerit molestie. Nam suscipit leo vitae tellus tristique, vitae tristique justo fringilla.</p>
+      <h2>Faktura ${object.number}</h2>
+      <p>Hej ${object.partner_id.name},<br><br>
+      Du har modtaget en ny faktura fra ${object.company_id.name}.</p>
       <spacer size="15"></spacer>
       <h2>Detaljer</h2>
+      
       <table>
-        <tr><th>Beskrivelse</th><th>#</th><th>Beløb</th></tr>
-        <tr><td>Kontingent</td><td>2</td><td>DKK 100</td></tr>
-        <tr><td>Kontingent</td><td>2</td><td>DKK 100</td></tr>
-        <tr><td>Kontingent</td><td>2</td><td>DKK 100</td></tr>
-        <tr>
-          <td colspan="2"><b>I alt:</b></td>
-          <td>DKK 300</td>
-        </tr>
+        <tr><th>Item</th><th>Price</th></tr>
+        <tr><td>Fakturanummer</td><td>${object.number}</td></tr>
+        <tr><td>Fakturabeløb</td><td>${"%.2f" % object.amount_total} ${object.currency_id.name}</td></tr>
+        <tr><td>Betalingsdato</td><td>${object.date_due}</td></tr>
       </table>
       <spacer size="30"></spacer>
-        <button href="#" class="rounded">Betal faktura</button>
-        <p class="description">Note: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      % if object.organization_id.payment_activated: % if object.profile_id.subscription_card:
+      <p>Fakturaen vil blive betalt automatisk med det registrerede betalingskort (${object.profile_id.subscription_card}) på betalingsdatoen.<br><br>
+      <button href="${object.payment_link}" class="rounded">Betal faktura</button></p>
+      % else:
+      <p>Du kan betale denne faktura eller registrere et betalingskort til automatiske betalinger på:<br>
+      <button href="${object.payment_link}" class="rounded">Betal faktura</button></p>
+      % endif % endif
+      </p>
+      <spacer size="30"></spacer>
+      <h3>Specifikation:</h3>
+      % for line in object.invoice_line: % endfor
+      <p><b>${line.name}    ${"%.2f" % line.price_subtotal}</b>
+      <br><br>
+
       <spacer size="30"></spacer>
       <p>Spejderhilsen<br>
-      <b>xxxx</b></p>
+      <b>${object.company_id.name}</b></p>
       <spacer size="10"></spacer>
     </columns>
   </row>
